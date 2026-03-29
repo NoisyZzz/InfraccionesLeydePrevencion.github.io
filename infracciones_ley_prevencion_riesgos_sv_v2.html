@@ -1,0 +1,443 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{font-family:var(--font-sans);padding:0 0 2rem}
+.hero{padding:2rem 1.5rem 1.5rem;border-bottom:0.5px solid var(--color-border-tertiary)}
+.hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.08em;color:var(--color-text-tertiary);text-transform:uppercase;margin-bottom:8px}
+.hero-title{font-size:22px;font-weight:500;color:var(--color-text-primary);line-height:1.3;margin-bottom:6px}
+.hero-sub{font-size:13px;color:var(--color-text-secondary);line-height:1.5}
+.stats-row{display:flex;gap:8px;padding:1rem 1.5rem;border-bottom:0.5px solid var(--color-border-tertiary)}
+.stat{flex:1;background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.75rem 1rem}
+.stat-num{font-size:24px;font-weight:500;line-height:1}
+.stat-label{font-size:11px;color:var(--color-text-secondary);margin-top:4px}
+.stat.s-green .stat-num{color:#3B6D11}
+.stat.s-amber .stat-num{color:#854F0B}
+.stat.s-red .stat-num{color:#A32D2D}
+.nav{display:flex;gap:6px;padding:1.25rem 1.5rem 0}
+.nav-btn{display:flex;align-items:center;gap:7px;padding:8px 16px;font-size:13px;font-weight:500;border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer;transition:background 0.15s,color 0.15s,border-color 0.15s}
+.nav-btn .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.nav-btn .cnt{font-size:11px;font-weight:400;opacity:0.7}
+.nav-btn.active.g{background:#EAF3DE;color:#27500A;border-color:#97C459}
+.nav-btn.active.a{background:#FAEEDA;color:#633806;border-color:#EF9F27}
+.nav-btn.active.r{background:#FCEBEB;color:#791F1F;border-color:#F09595}
+.dot-g{background:#3B6D11}.dot-a{background:#BA7517}.dot-r{background:#A32D2D}
+.section{display:none;padding:1.25rem 1.5rem 0}
+.section.active{display:block}
+.section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1rem}
+.section-title{font-size:15px;font-weight:500;color:var(--color-text-primary)}
+.section-art{font-size:12px;color:var(--color-text-tertiary)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;display:flex;flex-direction:column;transition:border-color 0.15s}
+.card:hover{border-color:var(--color-border-secondary)}
+.card-img-wrap{position:relative;height:150px;overflow:hidden;background:var(--color-background-secondary);flex-shrink:0}
+.card-img{width:100%;height:100%;object-fit:cover;display:block}
+.card-num{position:absolute;top:10px;left:10px;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500}
+.num-g{background:#EAF3DE;color:#27500A}
+.num-a{background:#FAEEDA;color:#633806}
+.num-r{background:#FCEBEB;color:#791F1F}
+.card-body{padding:1rem;flex:1;display:flex;flex-direction:column;gap:6px}
+.card-art{font-size:11px;color:var(--color-text-tertiary)}
+.card-title{font-size:13px;font-weight:500;color:var(--color-text-primary);line-height:1.4}
+.card-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.65;flex:1}
+.card-footer{display:flex;align-items:center;gap:6px;padding-top:8px;margin-top:auto;border-top:0.5px solid var(--color-border-tertiary)}
+.fine-icon{width:14px;height:14px;flex-shrink:0}
+.fine-text{font-size:11px;color:var(--color-text-tertiary)}
+.pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:3px 8px;border-radius:20px;border:0.5px solid}
+.pill-g{background:#EAF3DE;color:#27500A;border-color:#C0DD97}
+.pill-a{background:#FAEEDA;color:#633806;border-color:#FAC775}
+.pill-r{background:#FCEBEB;color:#791F1F;border-color:#F7C1C1}
+</style>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-eyebrow">Decreto N° 254 · El Salvador</div>
+    <div class="hero-title">Infracciones a la Ley General de Prevención<br>de Riesgos en los Lugares de Trabajo por William Ruano</div>
+    <div class="hero-sub">Clasificación según Arts. 77–80 · 20 infracciones seleccionadas</div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat s-green">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Infracciones leves</div>
+    </div>
+    <div class="stat s-amber">
+      <div class="stat-num">7</div>
+      <div class="stat-label">Infracciones graves</div>
+    </div>
+    <div class="stat s-red">
+      <div class="stat-num">7</div>
+      <div class="stat-label">Infracciones muy graves</div>
+    </div>
+  </div>
+
+  <div class="nav">
+    <button class="nav-btn active g" onclick="show('leve',this,'g')">
+      <span class="dot dot-g"></span> Leves <span class="cnt">(6)</span>
+    </button>
+    <button class="nav-btn a" onclick="show('grave',this,'a')">
+      <span class="dot dot-a"></span> Graves <span class="cnt">(7)</span>
+    </button>
+    <button class="nav-btn r" onclick="show('muygrave',this,'r')">
+      <span class="dot dot-r"></span> Muy graves <span class="cnt">(7)</span>
+    </button>
+  </div>
+
+  <div id="sec-leve" class="section active">
+    <div class="section-header">
+      <span class="section-title">Infracciones leves</span>
+      <span class="section-art">Art. 78 · Multa: 4–10 salarios mínimos</span>
+    </div>
+    <div class="grid">
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img class="card-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=70" onerror="this.style.display='none'" alt="">
+          <span class="card-num num-g">1</span>
+        </div>
+        <div class="card-body">
+          <div class="card-art">Art. 78 · N° 1</div>
+          <div class="card-title">Falta de limpieza en el lugar de trabajo</div>
+          <div class="card-desc">No mantener el lugar de trabajo en condiciones limpias e higiénicas, siempre que ello no represente un riesgo grave para la salud de los trabajadores.</div>
+          <div class="card-footer">
+            <svg class="fine-icon" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="9" rx="1.5" stroke="#3B6D11" stroke-width="1"/><path d="M5 3V2a2 2 0 0 1 4 0v1" stroke="#3B6D11" stroke-width="1"/></svg>
+            <span class="fine-text">Sanción: 4 a 10 salarios mínimos mensuales</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img class="card-img" src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=500&q=70" onerror="this.style.display='none'" alt="">
+          <span class="card-num num-g">2</span>
+        </div>
+        <div class="card-body">
+          <div class="card-art">Art. 78 · N° 2</div>
+          <div class="card-title">Omisión de comunicar la existencia del comité</div>
+          <div class="card-desc">No notificar a la autoridad competente la existencia del Comité de Seguridad y Salud Ocupacional dentro de los ocho días hábiles siguientes a su creación.</div>
+          <div class="card-footer">
+            <svg class="fine-icon" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="9" rx="1.5" stroke="#3B6D11" stroke-width="1"/><path d="M5 3V2a2 2 0 0 1 4 0v1" stroke="#3B6D11" stroke-width="1"/></svg>
+            <span class="fine-text">Sanción: 4 a 10 salarios mínimos mensuales</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img class="card-img" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&q=70" onerror="this.style.display='none'" alt="">
+          <span class="card-num num-g">3</span>
+        </div>
+        <div class="card-body">
+          <div class="card-art">Art. 78 · N° 3</div>
+          <div class="card-title">No notificar accidentes de trabajo a tiempo</div>
+          <div class="card-desc">Omitir la notificación de los daños ocasionados por accidentes de trabajo a la Dirección General de Previsión Social, dentro del plazo legal establecido.</div>
+          <div class="card-footer">
+            <svg class="fine-icon" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="9" rx="1.5" stroke="#3B6D11" stroke-width="1"/><path d="M5 3V2a2 2 0 0 1 4 0v1" stroke="#3B6D11" stroke-width="1"/></svg>
+            <span class="fine-text">Sanción: 4 a 10 salarios mínimos mensuales</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img class="card-img" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=70" onerror="this.style.display='none'" alt="">
+          <span class="card-num num-g">4</span>
+        </div>
+        <div class="card-body">
+          <div class="card-art">Art. 78 · N° 4</div>
+          <div class="card-title">Ausencia de registro de accidentes y enfermedades</div>
+          <div class="card-desc">No llevar un registro actualizado de accidentes de trabajo, enfermedades profesionales y sucesos peligrosos ocurridos en la empresa.</div>
+          <div class="card-footer">
+            <svg class="fine-icon" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="9" rx="1.5" stroke="#3B6D11" stroke-width="1"/><path d="M5 3V2a2 2 0 0 1 4 0v1" stroke="#3B6D11" stroke-width="1"/></svg>
+            <span class="fine-text">Sanción: 4 a 10 salarios mínimos mensuales</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img class="card-img" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500&q=70" onerror="this.style.display='none'" alt="">
+          <span class="card-num num-g">5</span>
+        </div>
+        <div class="card-body">
+          <div class="card-art">Art. 78 · N° 5</div>
+          <div class="card-title">Programa de gestión no actualizado</div>
+          <div class="card-desc">No actualizar anualmente el Programa de Gestión de Prevención de Riesgos Ocupacionales o no tenerlo disponible para inspección del Ministerio de Trabajo.</div>
+          <div class="card-footer">
+            <svg class="fine-icon" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="9" rx="1.5" stroke="#3B6D11" stroke-width="1"/><path d="M5 3V2a2 2 0 0 1 4 0v1" stroke="#3B6D11" stroke-width="1"/></svg>
+            <span class="fine-text">Sanción: 4 a 10 salarios mínimos mensuales</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img class="card-img" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&q=70" onerror="this.style.display='none'" alt="">
+          <span class="card-num num-g">6</span>
+        </div>
+        <div class="card-body">
+          <div class="card-art">Art. 78 · N° 6</div>
+          <div class="card-title">Sin programa de exámenes médicos</div>
+          <div class="card-desc">No establecer el programa de exámenes médicos y atención de primeros auxilios para los trabajadores en el lugar de trabajo, conforme lo exige la ley.</div>
+          <div class="card-footer">
+            <svg class="fine-icon" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="9" rx="1.5" stroke="#3B6D11" stroke-width="1"/><path d="M5 3V2a2 2 0 0 1 4 0v1" stroke="#3B6D11" stroke-width="1"/></svg>
+            <span class="fine-text">Sanción: 4 a 10 salarios mínimos mensuales</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="sec-grave" class="section">
+    <div class="section-header">
+      <span class="section-title">Infracciones graves</span>
+      <span class="section-art">Art. 79 · Multa: 14–18 salarios mínimos</span>
+    </div>
+    <div class="grid">
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img class="card-img" src="https://images.unsplash.com/photo-1574781330855-d0db8cc6a79c?w=500&q=70" onerror="this.style.display='none'" alt="">
+          <span class="card-num num-a">1</span>
+        </div>
+        <div class="card-body">
+          <div class="card-art">Art. 79 · N° 1</div>
+          <div class="card-title">Ausencia de señalización de seguridad</div>
+          <div class="card-desc">Carecer de señalización de seguridad visible y de comprensión general en las áreas de trabajo que presentan riesgos para los trabajadores.</div>
+          <div class="card-footer">
+            <svg class="fine-icon" viewBox="0 0 14 14" fill="none"><path d="M7 2L12.5 11.5H1.5L7 2Z" stroke="#854F0B" stroke-width="1"/><line x1="7" y1="6" x2="7" y2="9" stroke="#854F0B" stroke-width="1"/><circle cx="7" cy="10.5" r="0.5" fill="#854F0B"/></svg>
+            <span class="fine-text">Sanción: 14 a 18 salarios mínimos mensuales</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img class="card-img" src="https://images.unsplash.com/photo-1587440871875-191322ee64b0?w=500&q=70" onerror="this.style.display='none'" alt="">
+          <span class="card-num num-a">2</span>
+        </div>
+        <div class="card-body">
+          <div class="card-art">Art. 79 · N° 2</div>
+          <div class="card-title">No proporcionar equipo de protección personal</div>
+          <div class="card-desc">No suministrar el equipo de protección personal, herramientas o medios de protección colectiva requeridos para las labores que desempeñan los trabajadores.</div>
+          <div class="card-footer">
+            <svg class="fine-icon" viewBox="0 0 14 14" fill="none"><path d="M7 2L12.5 11.5H1.5L7 2Z" stroke="#854F0B" stroke-width="1"/><line x1="7" y1="6" x2="7" y2="9" stroke="#854F0B" stroke-width="1"/><circle cx="7" cy="10.5" r="0.5" fill="#854F0B"/></svg>
+            <span class="fine-text">Sanción: 14 a 18 salarios mínimos mensuales</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img class="card-img" src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=500&q=70" onerror="this.style.display='none'" alt="">
+          <span class="card-num num-a">3</span>
+        </div>
+        <div class="card-body">
+          <div class="card-art">Art. 79 · N° 3</div>
+          <div class="card-title">Escaleras portátiles sin condiciones de seguridad</div>
+          <div class="card-desc">Mantener en el lugar de trabajo escaleras portátiles que no reúnan los requisitos de seguridad, exponiendo a los trabajadores al riesgo de caídas.</div>
+          <div class="card-footer">
+            <svg class="fine-icon" viewBox="0 0 14 14" fill="none"><path d="M7 2L12.5 11.5H1.5L7 2Z" stroke="#854F0B" stroke-width="1"/><line x1="7" y1="6" x2="7" y2="9" stroke="#854F0B" stroke-width="1"/><circle cx="7" cy="10.5" r="0.5" fill="#854F0B"/></svg>
+            <span class="fine-text">Sanción: 14 a 18 salarios mínimos mensuales</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img class="card-img" src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=500&q=70" onerror="this.style.display='none'" alt="">
+          <span class="card-num num-a">4</span>
+        </div>
+        <div class="card-body">
+          <div class="card-art">Art. 79 · N° 4</div>
+          <div class="card-title">Instalaciones de agua, gas o ventilación defectuosas</div>
+          <div class="card-desc">Instalaciones del lugar de trabajo, artefactos y dispositivos de agua, gas, calefacción o ventilación que no cumplan con los requisitos técnicos exigidos por la ley.</div>
+          <div class="card-footer">
+            <svg class="fine-icon" viewBox="0 0 14 14" fill="none"><path d="M7 2L12.5 11.5H1.5L7 2Z" stroke="#854F0B" stroke-width="1"/><line x1="7" y1="6" x2="7" y2="9" stroke="#854F0B" stroke-width="1"/><circle cx="7" cy="10.5" r="0.5" fill="#854F0B"/></svg>
+            <span class="fine-text">Sanción: 14 a 18 salarios mínimos mensuales</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img class="card-img" src="https://images.unsplash.com/photo-1484807352052-23338990c6c6?w=500&q=70" onerror="this.style.display='none'" alt="">
+          <span class="card-num num-a">5</span>
+        </div>
+        <div class="card-body">
+          <div class="card-art">Art. 79 · N° 5</div>
+          <div class="card-title">Sin protección en canales, puentes y estanques</div>
+          <div class="card-desc">Omitir la colocación de elementos de protección adecuados en canales, puentes, estanques y gradas del lugar de trabajo, generando riesgo de accidentes.</div>
+          <div class="card-footer">
+            <svg class="fine-icon" viewBox="0 0 14 14" fill="none"><path d="M7 2L12.5 11.5H1.5L7 2Z" stroke="#854F0B" stroke-width="1"/><line x1="7" y1="6" x2="7" y2="9" stroke="#854F0B" stroke-width="1"/><circle cx="7" cy="10.5" r="0.5" fill="#854F0B"/></svg>
+            <span class="fine-text">Sanción: 14 a 18 salarios mínimos mensuales</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img class="card-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&q=70" onerror="this.style.display='none'" alt="">
+          <span class="card-num num-a">6</span>
+        </div>
+        <div class="card-body">
+          <div class="card-art">Art. 79 · N° 6</div>
+          <div class="card-title">Sin dispositivos de alerta en máquinas</div>
+          <div class="card-desc">Ausencia de dispositivos sonoros y visuales que alerten sobre la puesta en marcha de las máquinas, según la actividad desarrollada en el lugar de trabajo.</div>
+          <div class="card-footer">
+            <svg class="fine-icon" viewBox="0 0 14 14" fill="none"><path d="M7 2L12.5 11.5H1.5L7 2Z" stroke="#854F0B" stroke-width="1"/><line x1="7" y1="6" x2="7" y2="9" stroke="#854F0B" stroke-width="1"/><circle cx="7" cy="10.5" r="0.5" fill="#854F0B"/></svg>
+            <span class="fine-text">Sanción: 14 a 18 salarios mínimos mensuales</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img class="card-img" src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=500&q=70" onerror="this.style.display='none'" alt="">
+          <span class="card-num num-a">7</span>
+        </div>
+        <div class="card-body">
+          <div class="card-art">Art. 79 · N° 7</div>
+          <div class="card-title">Sin mantenimiento al equipo de protección personal</div>
+          <div class="card-desc">No brindar el mantenimiento adecuado al equipo de protección personal entregado a los trabajadores, comprometiendo su eficacia y la seguridad de quien lo usa.</div>
+          <div class="card-footer">
+            <svg class="fine-icon" viewBox="0 0 14 14" fill="none"><path d="M7 2L12.5 11.5H1.5L7 2Z" stroke="#854F0B" stroke-width="1"/><line x1="7" y1="6" x2="7" y2="9" stroke="#854F0B" stroke-width="1"/><circle cx="7" cy="10.5" r="0.5" fill="#854F0B"/></svg>
+            <span class="fine-text">Sanción: 14 a 18 salarios mínimos mensuales</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="sec-muygrave" class="section">
+    <div class="section-header">
+      <span class="section-title">Infracciones muy graves</span>
+      <span class="section-art">Art. 80 · Multa: 22–28 salarios mínimos</span>
+    </div>
+    <div class="grid">
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img class="card-img" src="https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=500&q=70" onerror="this.style.display='none'" alt="">
+          <span class="card-num num-r">1</span>
+        </div>
+        <div class="card-body">
+          <div class="card-art">Art. 80 · N° 1</div>
+          <div class="card-title">Sin equipo para combate de emergencias</div>
+          <div class="card-desc">No contar con equipo y medios adecuados para la prevención y combate de emergencias, tales como extintores, mangueras contra incendio y alarmas.</div>
+          <div class="card-footer">
+            <svg class="fine-icon" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#A32D2D" stroke-width="1"/><line x1="7" y1="4" x2="7" y2="7.5" stroke="#A32D2D" stroke-width="1"/><circle cx="7" cy="9.5" r="0.5" fill="#A32D2D"/></svg>
+            <span class="fine-text">Sanción: 22 a 28 salarios mínimos mensuales</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img class="card-img" src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=500&q=70" onerror="this.style.display='none'" alt="">
+          <span class="card-num num-r">2</span>
+        </div>
+        <div class="card-body">
+          <div class="card-art">Art. 80 · N° 2</div>
+          <div class="card-title">Sistemas presurizados sin dispositivos de seguridad</div>
+          <div class="card-desc">Operar sistemas presurizados que carezcan de válvulas de alivio, manómetros u otros dispositivos de seguridad requeridos por la normativa técnica aplicable.</div>
+          <div class="card-footer">
+            <svg class="fine-icon" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#A32D2D" stroke-width="1"/><line x1="7" y1="4" x2="7" y2="7.5" stroke="#A32D2D" stroke-width="1"/><circle cx="7" cy="9.5" r="0.5" fill="#A32D2D"/></svg>
+            <span class="fine-text">Sanción: 22 a 28 salarios mínimos mensuales</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img class="card-img" src="https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=500&q=70" onerror="this.style.display='none'" alt="">
+          <span class="card-num num-r">3</span>
+        </div>
+        <div class="card-body">
+          <div class="card-art">Art. 80 · N° 3</div>
+          <div class="card-title">Sin depósitos apropiados para combustibles o tóxicos</div>
+          <div class="card-desc">Carecer de depósitos apropiados para el almacenaje y transporte de combustibles líquidos, sustancias químicas o tóxicas en los lugares donde se trabaje con ellas.</div>
+          <div class="card-footer">
+            <svg class="fine-icon" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#A32D2D" stroke-width="1"/><line x1="7" y1="4" x2="7" y2="7.5" stroke="#A32D2D" stroke-width="1"/><circle cx="7" cy="9.5" r="0.5" fill="#A32D2D"/></svg>
+            <span class="fine-text">Sanción: 22 a 28 salarios mínimos mensuales</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img class="card-img" src="https://images.unsplash.com/photo-1495611216271-93ef48d7f484?w=500&q=70" onerror="this.style.display='none'" alt="">
+          <span class="card-num num-r">4</span>
+        </div>
+        <div class="card-body">
+          <div class="card-art">Art. 80 · N° 4</div>
+          <div class="card-title">Ascensores y montacargas en condición de riesgo</div>
+          <div class="card-desc">Mantener en funcionamiento ascensores, montacargas y equipos de izar que representen un riesgo para la seguridad e integridad de los trabajadores.</div>
+          <div class="card-footer">
+            <svg class="fine-icon" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#A32D2D" stroke-width="1"/><line x1="7" y1="4" x2="7" y2="7.5" stroke="#A32D2D" stroke-width="1"/><circle cx="7" cy="9.5" r="0.5" fill="#A32D2D"/></svg>
+            <span class="fine-text">Sanción: 22 a 28 salarios mínimos mensuales</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img class="card-img" src="https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=500&q=70" onerror="this.style.display='none'" alt="">
+          <span class="card-num num-r">5</span>
+        </div>
+        <div class="card-body">
+          <div class="card-art">Art. 80 · N° 5</div>
+          <div class="card-title">Sin lámparas apropiadas en ambientes explosivos</div>
+          <div class="card-desc">Carecer de lámparas o accesorios eléctricos apropiados en ambientes con atmósferas explosivas o inflamables, lo que puede desencadenar incendios o explosiones.</div>
+          <div class="card-footer">
+            <svg class="fine-icon" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#A32D2D" stroke-width="1"/><line x1="7" y1="4" x2="7" y2="7.5" stroke="#A32D2D" stroke-width="1"/><circle cx="7" cy="9.5" r="0.5" fill="#A32D2D"/></svg>
+            <span class="fine-text">Sanción: 22 a 28 salarios mínimos mensuales</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img class="card-img" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500&q=70" onerror="this.style.display='none'" alt="">
+          <span class="card-num num-r">6</span>
+        </div>
+        <div class="card-body">
+          <div class="card-art">Art. 80 · N° 6</div>
+          <div class="card-title">No informar cambios en equipos o instalaciones</div>
+          <div class="card-desc">No comunicar a la Dirección General de Previsión Social las modificaciones sustanciales realizadas en equipos o instalaciones que representen riesgos para los trabajadores.</div>
+          <div class="card-footer">
+            <svg class="fine-icon" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#A32D2D" stroke-width="1"/><line x1="7" y1="4" x2="7" y2="7.5" stroke="#A32D2D" stroke-width="1"/><circle cx="7" cy="9.5" r="0.5" fill="#A32D2D"/></svg>
+            <span class="fine-text">Sanción: 22 a 28 salarios mínimos mensuales</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img-wrap">
+          <img class="card-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&q=70" onerror="this.style.display='none'" alt="">
+          <span class="card-num num-r">7</span>
+        </div>
+        <div class="card-body">
+          <div class="card-art">Art. 80 · N° 7</div>
+          <div class="card-title">Instalar generador de vapor sin autorización</div>
+          <div class="card-desc">Instalar o poner en servicio un generador de vapor o recipiente sujeto a presión sin la autorización de la Dirección General de Previsión Social, o en condiciones deficientes.</div>
+          <div class="card-footer">
+            <svg class="fine-icon" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#A32D2D" stroke-width="1"/><line x1="7" y1="4" x2="7" y2="7.5" stroke="#A32D2D" stroke-width="1"/><circle cx="7" cy="9.5" r="0.5" fill="#A32D2D"/></svg>
+            <span class="fine-text">Sanción: 22 a 28 salarios mínimos mensuales</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function show(id, btn, cls) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active','g','a','r'));
+  document.getElementById('sec-' + id).classList.add('active');
+  btn.classList.add('active', cls);
+}
+</script>
